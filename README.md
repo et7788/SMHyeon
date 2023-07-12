@@ -12,6 +12,8 @@
 
 ## <font size="5">프로젝트 링크</font>
 <a href="[링크](https://colab.research.google.com/drive/1YmQGkUU5OIj7o76tteT8AWijUA-EC5RJ?authuser=1#scrollTo=zFRGTiyujhdh)"><img src="https://img.shields.io/badge/Colab-F9AB00?style=flat-square&logo=Google Colab&logoColor=white"/></a>
+<a href="https://colab.research.google.com/drive/1YmQGkUU5OIj7o76tteT8AWijUA-EC5RJ?authuser=1#scrollTo=zFRGTiyujhdh">
+  <img src="https://img.shields.io/badge/Colab-F9AB00?style=flat-square&logo=Google%20Colab&logoColor=white" alt="[YOLO-Nas](https://colab.research.google.com/drive/1eRd_IUlRqNR2i1HsBP6Cr8d9JDjtiptJ)" style="margin-right: 10px;"></a>
 <a href="[[링크](https://colab.research.google.com/drive/1YmQGkUU5OIj7o76tteT8AWijUA-EC5RJ?authuser=1#scrollTo=zFRGTiyujhdh)](https://www.notion.so/d543b8939d584a14a6408637f6b6d0b2)"><img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/></a>
 
 ## <font size="5">내용</font>
