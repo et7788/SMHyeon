@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Streaming with OpenCV and Flask</title>
+    <style>
+        #video-container {
+            margin: 20px;
+        }
+        #video-frame {
+            transition: transform 0.3s ease;
+        }
+        .rotate-90 {
+            transform: rotate(90deg);
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        .rotate-270 {
+            transform: rotate(270deg);
+        }
+        .button-container {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .button-container button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Streaming with OpenCV and Flask</h1>
+    <div id="video-container">
+        <img id="video-frame" src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+    <div class="button-container">
+        <button id="gray-filter-button">Apply Gray Filter</button>
+        <button id="rgb-filter-button">Apply RGB Filter</button>
+        <button id="rotate-button">Rotate 90 Degrees</button>
+    </div>
+
+    <script>
+        var videoFrame = document.getElementById('video-frame');
+        var grayFilterButton = document.getElementById('gray-filter-button');
+        var rgbFilterButton = document.getElementById('rgb-filter-button');
+        var rotateButton = document.getElementById('rotate-button');
+        var rotationAngle = 0;
+
+        grayFilterButton.addEventListener('click', function() {
+            videoFrame.style.filter = 'grayscale(100%)';
+        });
+
+        rgbFilterButton.addEventListener('click', function() {
+            videoFrame.style.filter = 'none';
+        });
+
+        rotateButton.addEventListener('click', function() {
+            rotationAngle += 90;
+            videoFrame.style.transform = 'rotate(' + rotationAngle + 'deg)';
+            videoFrame.classList.remove('rotate-90', 'rotate-180', 'rotate-270');
+            videoFrame.classList.add('rotate-' + rotationAngle);
+        });
+    </script>
+</body>
+</html>
