@@ -1,8 +1,8 @@
 task: detect
 mode: train
-model: yolov8n.pt
-data: /YOLOv8/real-1/data.yaml
-epochs: 100
+model: C:\Users\User\Desktop\Github\YOLO(µö·¯´×)\YOLOv8\yolov8n.pt
+data: C:\Users\User\Desktop\Github\YOLO(µö·¯´×)\YOLOv8\real-1\data.yaml
+epochs: 50
 patience: 30
 batch: 16
 imgsz: 640
