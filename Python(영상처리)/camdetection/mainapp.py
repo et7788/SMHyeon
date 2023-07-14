@@ -1,5 +1,6 @@
 from flask import Flask, Response, render_template
 from video_processing import generate_frames
+from resize import zoom_frames
 
 app = Flask(__name__)
 
