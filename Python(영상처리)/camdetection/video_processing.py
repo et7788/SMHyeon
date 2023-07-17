@@ -3,12 +3,9 @@ from ultralytics import YOLO
 import cv2
 from deep_sort_realtime.deepsort_tracker import DeepSort
 
-CONFIDENCE_THRESHOLD = 0.6
+CONFIDENCE_THRESHOLD = 0.6 #기준이 되는 정확도
 GREEN = (0, 255, 0)
 BLAKE = (0, 0, 0)
-video_dir = r"C:\Users\User\Desktop\Github\Python(영상처리)\camdetection\data\test.mp4"
-test_dir = r"C:\Users\User\Desktop\Github\YOLO(딥러닝)\YOLOv8\testimg\car2.png"
-
 # 비디오 캡처 객체를 초기화합니다.
 video_cap = cv2.VideoCapture(0)
 # 비디오 프레임 크기를 가져옵니다.
@@ -16,13 +13,14 @@ frame_width = int(video_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(video_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 # 사전 훈련된 YOLOv8 모델을 불러옵니다.
-model = YOLO(r"C:\Users\User\Desktop\Github\YOLO(딥러닝)\YOLOv8\carnum.pt")
+model = YOLO(r"C:\Users\User\Desktop\Github\Python(영상처리)\camdetection\yolo_model\carnum.pt")
 # DeepSort는 실시간 객체 추적을 수행하는 알고리즘 중 하나입니다.
 # max_age는 트랙의 최대 수명을 나타내는 매개변수로, 개체의 최대 트랙 지속 시간을 결정합니다.
 tracker = DeepSort(max_age=50)
 
 def generate_frames():
     while True:
+        #프레임단위로 비디오 캡처
         start = datetime.datetime.now()
 
         ret, frame = video_cap.read()
@@ -45,12 +43,6 @@ def generate_frames():
             # 객체의 클래스 이름을 저장합니다.
             class_name = model.names[int(box[5])]
             # 객체의 중심점 좌표를 계산합니다.
-            center_x = (xmin + xmax) // 2
-            center_y = (ymin + ymax) // 2
-
-            # 바운딩 박스의 크기를 확대합니다.
-            width = xmax - xmin
-            height = ymax - ymin
 
             # 확대한 바운딩 박스를 프레임에 그립니다.
             cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), GREEN, 2)
@@ -66,6 +58,6 @@ def generate_frames():
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
 
-        # 클라이언트에게 프레임을 전송합니다.
+        # 인코딩 된 이미지를 클라이언트에게 프레임을 전송합니다.
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
