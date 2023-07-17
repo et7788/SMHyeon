@@ -27,6 +27,5 @@
 
 ## <font size="5">참고 링크</font>
 - [마크다운(Markdown) 사용법](https://m.blog.naver.com/jooeun0502/221956294941)
-- [GitHub README.md 작성하기 - 마크 다운 문법](https://backendcode.tistory.com/165)
-- [GitHub - README 파일 작성 방법](https://novlog.tistory.com/entry/GitHub-3-README-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-MarkDown)
+- [GitHub README.md 작성하기 - 마크 다운 문법](https://goddaehee.tistory.com/307)
 
