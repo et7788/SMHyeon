@@ -38,7 +38,12 @@ class App(QMainWindow, form_class):
         self.btn_blur.clicked.connect(self.funtionBlur)
         # pushButton (히스토그램버튼)을 클릭하면 아래 functionstop 메서드와 연결 됨.
         self.btn_hist.clicked.connect(self.funtionHist)
-
+        # pushButton (Gaussian버튼)을 클릭하면 아래 functionstop 메서드와 연결 됨.
+        self.btn_gaussian.clicked.connect(self.funtionGaussian)
+        # pushButton (Median버튼)을 클릭하면 아래 functionstop 메서드와 연결 됨.
+        self.btn_median.clicked.connect(self.funtionMedian)
+        # pushButton (Bilateral버튼)을 클릭하면 아래 functionstop 메서드와 연결 됨.
+        self.btn_bilateral.clicked.connect(self.funtionBilateral)
         # 비디오 레이블 크기를 저장할 변수
         self.display_width = 0
         self.display_height = 0
@@ -80,7 +85,7 @@ class App(QMainWindow, form_class):
     def funtionBlur(self):
         logging.warn("blur")
         self.thread.btn_num = 2
-        self.thread.blur_num = 16
+        self.thread.blur_num = 8
         self.thread.blur_enabled = not self.thread.blur_enabled
 
     def funtionHist(self):
@@ -89,6 +94,24 @@ class App(QMainWindow, form_class):
         self.thread.hist_enabled = not self.thread.hist_enabled
         self.thread.change_pixmap_ghist.connect(self.update_ghist)
         self.thread.change_pixmap_chist.connect(self.update_chist)
+
+    def funtionGaussian(self):
+        logging.warn("Gaussian")
+        self.thread.btn_num = 4
+        self.thread.gaussian_size = 9
+        self.thread.gaussian_enabled = not self.thread.gaussian_enabled   
+
+    def funtionMedian(self):
+        logging.warn("Median")
+        self.thread.btn_num = 5
+        self.thread.median_size = 9
+        self.thread.median_enabled = not self.thread.median_enabled
+
+    def funtionBilateral(self):
+        logging.warn("Bilateral")
+        self.thread.btn_num = 6
+        self.thread.bilateral_size = 9
+        self.thread.bilateral_enabled = not self.thread.bilateral_enabled
 
     def closeEvent(self, event):
         logging.warn("closeEvent")

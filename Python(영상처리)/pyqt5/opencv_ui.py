@@ -13,6 +13,7 @@ import matplotlib.pylab as plt
 import io
 import matplotlib
 matplotlib.use('agg')
+
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
@@ -36,6 +37,12 @@ class VideoThread(QThread):
         self.blur_enabled = False
         self.blur_num = 0
         self.hist_enabled = False
+        self.gaussian_size = 0
+        self.gaussian_enabled = False
+        self.median_size = 0
+        self.median_enabled = False
+        self.bilateral_size = 0
+        self.bilateral_enabled = False
 
     # 스레드에서 실행될 작업 정의
     def run(self):
@@ -51,6 +58,12 @@ class VideoThread(QThread):
                     self.check_blur(frame)
                 elif self.btn_num == 3:
                     self.check_hist(frame)
+                elif self.btn_num == 4:
+                    self.check_gaussian(frame)
+                elif self.btn_num == 5:
+                    self.check_median(frame)
+                elif self.btn_num == 6:
+                    self.check_bilateral(frame)
                 else :
                     self.run_frame(frame)
 
@@ -87,7 +100,28 @@ class VideoThread(QThread):
             self.change_pixmap_chist.emit(chist)
         else :
             self.run_frame(frame)
-    
+
+    def check_gaussian(self, frame):
+        if self.gaussian_enabled:
+            frame = self.gaussian_frame(frame)
+            self.run_frame(frame)
+        else :
+            self.run_frame(frame)
+
+    def check_median(self, frame):
+        if self.median_enabled:
+            frame = self.median_frame(frame)
+            self.run_frame(frame)
+        else :
+            self.run_frame(frame)
+
+    def check_bilateral(self, frame):
+        if self.bilateral_enabled:
+            frame = self.bilateral_frame(frame)
+            self.run_frame(frame)
+        else :
+            self.run_frame(frame)
+
     def normal(self, frame):
         self.change_pixmap_signal.emit(frame)
 
@@ -215,3 +249,23 @@ class VideoThread(QThread):
 
         return qimg
 
+    def gaussian_frame(self, frame):
+        frame = np.clip((frame / 255 + np.random.normal(scale=0.1, size  = frame.shape)) * 255, 0, 255).astype('uint8')
+        gaussian = cv2.GaussianBlur(frame, (self.gaussian_size, self.gaussian_size), 0)
+        return gaussian
+
+    def median_frame(self, frame):
+        N = 10000
+        idx1 = np.random.randint(frame.shape[0], size = N)
+        idx2 = np.random.randint(frame.shape[1], size = N)
+        frame[idx1, idx2] = 0
+
+        median = cv2.medianBlur(frame, self.median_size)
+
+        return median
+    
+    def bilateral_frame(self, frame):
+        frame = np.clip((frame / 255 + np.random.normal(scale=0.1, size  = frame.shape)) * 255, 0, 255).astype('uint8')
+        bilateral = cv2.bilateralFilter(frame, self.bilateral_size, 75, 75)
+        
+        return bilateral
