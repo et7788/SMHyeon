@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>919</width>
+    <width>1149</width>
     <height>796</height>
    </rect>
   </property>
@@ -163,8 +163,8 @@
     <rect>
      <x>10</x>
      <y>420</y>
-     <width>391</width>
-     <height>231</height>
+     <width>531</width>
+     <height>321</height>
     </rect>
    </property>
    <property name="autoFillBackground">
@@ -177,7 +177,35 @@
     <number>1</number>
    </property>
    <property name="text">
-    <string>Histogram</string>
+    <string>GrayHistogram</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="hist_label2">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>420</y>
+     <width>531</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="text">
+    <string>ColorHistogram</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

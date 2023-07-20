@@ -86,7 +86,9 @@ class App(QMainWindow, form_class):
     def funtionHist(self):
         logging.warn("funtionHist")
         self.thread.btn_num = 3
-        self.thread.change_pixmap_hist.connect(self.update_hist)
+        self.thread.hist_enabled = not self.thread.hist_enabled
+        self.thread.change_pixmap_ghist.connect(self.update_ghist)
+        self.thread.change_pixmap_chist.connect(self.update_chist)
 
     def closeEvent(self, event):
         logging.warn("closeEvent")
@@ -108,6 +110,22 @@ class App(QMainWindow, form_class):
         p = convert_to_Qt_format.scaled(self.display_width, self.display_height, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
 
+    @pyqtSlot(QtGui.QImage)
+    def update_ghist(self, hist):
+        qt_ghist = self.convert_hist_qt(hist)
+        self.hist_label.setPixmap(qt_ghist)
+
+    @pyqtSlot(QtGui.QImage)
+    def update_chist(self, hist):
+        qt_chist = self.convert_hist_qt(hist)
+        self.hist_label2.setPixmap(qt_chist)
+
+    def convert_hist_qt(self, hist):
+        # hist_label의 크기에 맞게 qimg 리사이즈
+        label_width = self.hist_label.width()
+        label_height = self.hist_label.height()
+        qimg = hist.scaled(label_width, label_height, Qt.KeepAspectRatio)
+        return QtGui.QPixmap.fromImage(qimg)
 #코드 실행시 GUI 창을 띄우는 부분
 #__name__ == "__main__" : 모듈로 활용되는게 아니라 해당 .py파일에서 직접 실행되는 경우에만 코드 실행
 if __name__ == "__main__" :
