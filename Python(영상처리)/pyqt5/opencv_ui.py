@@ -19,7 +19,7 @@ BLACK = (0, 0, 0)
 
 CONFIDENCE_THRESHOLD = 0.6 #기준이 되는 정확도
 # 사전 훈련된 YOLOv8 모델을 불러옵니다.
-model = YOLO(r"C:\Users\User\Desktop\Github\Python(영상처리)\camdetection\yolo_model\carnum.pt")
+model = YOLO(r"C:\Users\User\Desktop\Github\Python(영상처리)\pyqt5\best_gpu.pt")
 
 class VideoThread(QThread):
     # 작업이 끝났을 때 메인 스레드로 결과를 전달하기 위해 시그널 numpy의 형식으로 변환
