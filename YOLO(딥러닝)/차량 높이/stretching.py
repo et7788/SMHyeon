@@ -17,29 +17,31 @@ def enhance_image(image_path):
     resized_img_cv2 = cv2.resize(img_cv2, None, fx=0.5, fy=0.5)
 
     # Increase the brightness of the image (by adding a constant value to all pixels)
-    brightened_img = resized_img_cv2 + 50
+    brightened_img = resized_img_cv2 + 100
 
     # Apply adaptive histogram equalization to enhance contrast using cv2
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     equalized_img = clahe.apply(brightened_img)
 
     # Sharpening using unsharp mask using cv2
-    blurred = cv2.GaussianBlur(equalized_img, (0, 0), 3)
-    sharpened = cv2.addWeighted(equalized_img, 1.5, blurred, -0.5, 0)
+    blurred1 = cv2.GaussianBlur(brightened_img, (0, 0), 3)
+    sharpened = cv2.addWeighted(brightened_img, 1.5, blurred1, -0.5, 0)
 
-    # Apply thresholding to enhance the edges of dark objects using cv2
-    _, thresholded_img = cv2.threshold(sharpened, 150, 255, cv2.THRESH_BINARY)
-
+    # Sharpening using unsharp mask using cv2
+    blurred2 = cv2.GaussianBlur(equalized_img, (0, 0), 3)
+    equalized_sharpened = cv2.addWeighted(equalized_img, 1.5, blurred2, -0.5, 0)
+    
+    sharpened_equalized = clahe.apply(sharpened)
     # Display the original, resized, brightened, equalized, sharpened, and thresholded images
     cv2.imshow('Original Image', img_cv2)
-    cv2.imshow('Resized Image', resized_img_cv2)
     cv2.imshow('Brightened Image', brightened_img)
     cv2.imshow('Equalized Image', equalized_img)
     cv2.imshow('Sharpened Image', sharpened)
-    cv2.imshow('Thresholded Image', thresholded_img)
+    cv2.imshow('Equalized_Sharpened Image', equalized_sharpened)
+    cv2.imshow('Sharpened_Equalized Image', sharpened_equalized)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    image_path = r"C:/Users/User/Desktop/Github/YOLO(딥러닝)/차량 높이/darktest.jpg"  # Replace with the path to your image
+    image_path = r"C:\Users\User\Desktop\Github\YOLO(딥러닝)\차량 높이\darktest2.jpg"  # Replace with the path to your image
     enhance_image(image_path)
