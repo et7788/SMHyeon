@@ -1,0 +1,1 @@
+labelImg.exe data/img classes.txt
